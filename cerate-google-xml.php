@@ -7,7 +7,7 @@ try {
         throw new Exception("Veritabanı bağlantısı başarısız!");
     }
 
-    $xmlFile = "raxgame-urunler.xml";
+    $xmlFile = "google-urunler.xml";
 
     $xml = new DOMDocument("1.0", "UTF-8");
     $xml->formatOutput = true;
@@ -20,9 +20,9 @@ try {
     $channel = $xml->createElement("channel");
     $rss->appendChild($channel);
 
-    $title = $xml->createElement("title", "RaxGame Ürünleri");
-    $link = $xml->createElement("link", "https://raxgame.com");
-    $description = $xml->createElement("description", "RaxGame dijital ürünleri");
+    $title = $xml->createElement("title", "Dijital Ürünleri");
+    $link = $xml->createElement("link", "https://siteniz.com");
+    $description = $xml->createElement("description", "Siteniz dijital ürünleri");
 
     $channel->appendChild($title);
     $channel->appendChild($link);
@@ -40,7 +40,7 @@ try {
 
         /** "./" karakterlerini kaldır ve tam URL oluştur */
         $cleanImgPath = ltrim($row['img'], './'); 
-        $fullImageURL = "https://raxgame.com/" . $cleanImgPath;
+        $fullImageURL = "https://siteniz.com/" . $cleanImgPath;
 
         $safe_title = preg_replace('/[\x00-\x1F\x7F]/', '', $row['title']);
         $safe_description = preg_replace('/[\x00-\x1F\x7F]/', '', $row['seo_description']);
@@ -55,10 +55,10 @@ try {
         /** Fiyat sadece TL olacak şekilde formatlandı */
         $price = $xml->createElement("g:price", htmlspecialchars(number_format($row['price'], 2, '.', '') . " TRY"));
 
-        $seo_url = $xml->createElement("g:link", "https://raxgame.com/epin-urun/" . htmlspecialchars($row['seo_url']));
+        $seo_url = $xml->createElement("g:link", "https://siteniz.com/epin-urun/" . htmlspecialchars($row['seo_url']));
         $stock = $xml->createElement("g:availability", "in_stock");
         $condition = $xml->createElement("g:condition", "new");
-        $brand = $xml->createElement("g:brand", "RaxGame");
+        $brand = $xml->createElement("g:brand", "siteniz");
 
         /** GTIN olmayan dijital ürünler için identifier_exists false olarak ayarlandı */
         $identifier_exists = $xml->createElement("g:identifier_exists", "false");
